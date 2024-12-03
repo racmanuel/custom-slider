@@ -183,6 +183,7 @@ class Custom_Slider
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
         $this->loader->add_action('cmb2_admin_init', $plugin_admin, 'custom_slider_options_metabox' );
+        //$this->loader->add_filter('the_content', $plugin_admin, 'add_shortcode_to_homepage');
     }
 
     /**

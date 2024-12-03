@@ -87,7 +87,7 @@ class Custom_Slider_Public
     public function enqueue_scripts()
     {
 
-        wp_enqueue_script_module($this->plugin_name, plugin_dir_url(__FILE__) . 'js/custom-slider-public-dist.js', array('jquery'), $this->version, true);
+        wp_register_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/custom-slider-public-dist.js', array('jquery'), $this->version, true);
 
     }
 
@@ -106,6 +106,8 @@ class Custom_Slider_Public
      */
     public function custom_slider_shortcode_func($atts, $content = null)
     {
+        // Encola el script donde este el Shortcode, evitando cargarlo en toda la página.
+        wp_enqueue_script($this->plugin_name);
 
         // Combinar atributos predeterminados con los proporcionados por el usuario
         $atts = shortcode_atts(
@@ -125,26 +127,18 @@ class Custom_Slider_Public
         // Recuperar las imágenes del slider
         $slider_images = cmb2_get_option('custom_slider_options', 'custom_slider_repeat_group', []);
 
+        // Recuperar los colores desde las opciones
+        $arrow_color = cmb2_get_option('custom_slider_options', 'custom_slider_arrow_colorpicker', '#ffffff');
+        $dots_color = cmb2_get_option('custom_slider_options', 'custom_slider_dots_colorpicker', '#ffffff');
+
         // Iniciar el buffer de salida
         ob_start();
 
-        if (!empty($slider_images)): ?>
-        <!-- Swiper -->
-        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper">
-            <div class="swiper-wrapper">
-            <?php foreach ($slider_images as $slide): ?>
-                <?php if (!empty($slide['image'])): ?>
-                    <div class="swiper-slide">
-                        <img src="<?php echo esc_url($slide['image']); ?>" alt="Imagen del slider" loading="lazy"/>
-                    </div>
-                <?php endif;?>
-            <?php endforeach;?>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-	    <?php endif;
+        if (!empty($slider_images)) {
+            require_once plugin_dir_path(__FILE__) . 'partials/custom-slider-public-display.php';
+        } else {
+            _e('No hay imágenes disponibles para el slider. Vaya al Panel de WordPress > Custom Slider > Añadir Imagen.', 'custom-slider');
+        }
 
         // Capturar el contenido del buffer y limpiar
         $output = ob_get_clean();
@@ -152,5 +146,4 @@ class Custom_Slider_Public
         // Los shortcodes siempre deben devolver el contenido
         return $output;
     }
-
 }

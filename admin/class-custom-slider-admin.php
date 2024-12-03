@@ -125,6 +125,20 @@ class Custom_Slider_Admin
          * to be unique within this box.
          * Prefix is not needed.
          */
+        $cmb_options->add_field(array(
+            'name' => 'Color de flechas de Navegacion',
+            'id' => 'custom_slider_arrow_colorpicker',
+            'type' => 'colorpicker',
+            'default' => '#ffffff',
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Color de puntos de Paginacion',
+            'id' => 'custom_slider_dots_colorpicker',
+            'type' => 'colorpicker',
+            'default' => '#ffffff',
+        ));
+
         $group_field_id = $cmb_options->add_field(array(
             'id' => 'custom_slider_repeat_group',
             'type' => 'group',
@@ -151,12 +165,22 @@ class Custom_Slider_Admin
             'query_args' => array(
                 // Or only allow gif, jpg, or png images
                 'type' => array(
-					'image/gif',
-					'image/jpeg',
-					'image/png',
+                    'image/gif',
+                    'image/jpeg',
+                    'image/png',
                 ),
             ),
             'preview_size' => 'thumbnail', // Image size to use when previewing in the admin.
         ));
+    }
+
+    public function add_shortcode_to_homepage($content)
+    {
+        // Verificar si estamos en la página principal
+        if (is_front_page() && is_main_query()) {
+            // Agregar el shortcode al contenido existente
+            $content .= do_shortcode('[custom_slider_shortcode]');
+        }
+        return $content;
     }
 }
