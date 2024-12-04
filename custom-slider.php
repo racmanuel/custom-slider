@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       Custom Slider
  * Plugin URI:        https://plugin.com/custom-slider-uri/
- * Description:       A Short Plugin description. Keep it to the point.
+ * Description:       Plugin for Prixz technical testing. On active plugin insert 2 Shortcodes on Home Page, you can change the images on the slider go to Settings > Custom Slider > Add Images, and after the first slider show a slider of products.
  * Version:           1.0.0
  * Author:            racmanuel
  * Requires at least: 1.0.0
