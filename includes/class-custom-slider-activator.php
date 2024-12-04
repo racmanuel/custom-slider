@@ -71,7 +71,7 @@ class Custom_Slider_Activator
          * The plugin is now safely activated.
          * Perform your activation actions here.
          */
-		self::insert_shortcode_into_homepage();
+        self::insert_shortcode_into_homepage();
     }
 
     /**
@@ -172,10 +172,25 @@ class Custom_Slider_Activator
         if ($homepage_id) {
             // Obtén el contenido actual de la página
             $homepage_content = get_post_field('post_content', $homepage_id);
-            // Verifica que el shortcode no esté ya incluido
-            if (strpos($homepage_content, '[custom_slider_shortcode]') === false) {
-                // Agrega el shortcode al inicio del contenido
-                $homepage_content = "[custom_slider_shortcode]\n" . $homepage_content;
+
+            // Verifica si los shortcodes no están ya incluidos
+            $slider_shortcode = '[custom_slider_shortcode]';
+            $products_shortcode = '[custom_slider_products_shortcode]';
+
+            $shortcodes_to_add = [];
+            if (strpos($homepage_content, $slider_shortcode) === false) {
+                $shortcodes_to_add[] = $slider_shortcode;
+            }
+            if (strpos($homepage_content, $products_shortcode) === false) {
+                $shortcodes_to_add[] = $products_shortcode;
+            }
+
+            // Si hay shortcodes que añadir
+            if (!empty($shortcodes_to_add)) {
+                // Construye el contenido con los nuevos shortcodes al inicio
+                $shortcodes_string = implode("\n", $shortcodes_to_add) . "\n";
+                $homepage_content = $shortcodes_string . $homepage_content;
+
                 // Actualiza la página con el nuevo contenido
                 wp_update_post(array(
                     'ID' => $homepage_id,

@@ -182,7 +182,7 @@ class Custom_Slider
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-        $this->loader->add_action('cmb2_admin_init', $plugin_admin, 'custom_slider_options_metabox' );
+        $this->loader->add_action('cmb2_admin_init', $plugin_admin, 'custom_slider_options_metabox');
         //$this->loader->add_filter('the_content', $plugin_admin, 'add_shortcode_to_homepage');
     }
 
@@ -203,7 +203,13 @@ class Custom_Slider
 
         // Shortcode name must be the same as in shortcode_atts() third parameter.
         $this->loader->add_shortcode($this->get_plugin_prefix() . 'shortcode', $plugin_public, 'custom_slider_shortcode_func');
+        $this->loader->add_shortcode($this->get_plugin_prefix() . 'products_shortcode', $plugin_public, 'custom_slider_products_shortcode_func');
 
+        // Enganchar la función en el loop de productos de WooCommerce
+        $this->loader->add_action('woocommerce_shop_loop_item_title', $plugin_public, 'sale_badge');
+        // Enganchar la función en la página individual del producto
+        $this->loader->add_action('woocommerce_single_product_summary', $plugin_public, 'sale_badge', 10);
+        
     }
 
     /**

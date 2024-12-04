@@ -1,0 +1,56 @@
+.mySwiperProducts .swiper-wrapper {
+  display: flex;
+  flex-wrap: nowrap; /* Asegura que los productos no se dividan en más de una fila */
+}
+
+.mySwiperProducts .swiper-slide {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 25%; /* Esto asegura que haya 4 columnas en pantallas grandes */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.mySwiperProducts .product-card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.mySwiperProducts .product-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.mySwiperProducts .product-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.mySwiperProducts .product-price {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.mySwiperProducts .regular-price {
+  text-decoration: line-through; /* Tachado */
+  color: #999; /* Color gris para el precio regular */
+  margin-right: 5px;
+}
+
+.mySwiperProducts .sale-price {
+  color: red; /* Precio rebajado en rojo */
+  font-weight: bold;
+}
+
+.mySwiperProducts .product-link {
+  padding: 2%;
+  background-color: #0073aa;
+  text-decoration: none;
+  border-radius: 12px;
+  color: #ffffff;
+}

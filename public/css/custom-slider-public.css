@@ -1,18 +1,20 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
-.swiper {
-  width: 100%;
-  height: 100%;
+/* Estilos para la etiqueta "Oferta del Día" */
+.sale-badge {
+  background-color: #ff5733; /* Color de fondo naranja */
+  color: white; /* Texto blanco */
+  font-size: 14px; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita */
+  padding: 5px 10px; /* Relleno alrededor del texto */
+  border-radius: 50px; /* Bordes redondeados */
+  position: absolute; /* Posición absoluta */
+  top: 10px; /* Espacio desde el borde superior */
+  left: 10px; /* Espacio desde el borde izquierdo */
+  z-index: 10; /* Asegura que se muestre encima de otros elementos */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
+/* Asegurar que la etiqueta no se sobreponga a otros elementos */
+.woocommerce-loop-product__link {
+  position: relative; /* Relativo para posicionar la etiqueta correctamente */
 }
